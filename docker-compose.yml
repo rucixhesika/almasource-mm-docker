@@ -36,12 +36,12 @@ services:
     tmpfs:
       - /tmp
     volumes:
-      - ${MATTERMOST_CONFIG_PATH}:/mattermost/config:rw
-      - ${MATTERMOST_DATA_PATH}:/mattermost/data:rw
-      - ${MATTERMOST_LOGS_PATH}:/mattermost/logs:rw
-      - ${MATTERMOST_PLUGINS_PATH}:/mattermost/plugins:rw
-      - ${MATTERMOST_CLIENT_PLUGINS_PATH}:/mattermost/client/plugins:rw
-      - ${MATTERMOST_BLEVE_INDEXES_PATH}:/mattermost/bleve-indexes:rw
+      - config:/mattermost/config:rw
+      - data:/mattermost/data:rw
+      - logs:/mattermost/logs:rw
+      - plugins:/mattermost/plugins:rw
+      - client-plugins:/mattermost/client/plugins:rw
+      - bleve-indexes:/mattermost/bleve-indexes:rw
       # When you want to use SSO with GitLab, you have to add the cert pki chain of GitLab inside Alpine
       # to avoid Token request failed: certificate signed by unknown authority 
       # (link: https://github.com/mattermost/mattermost-server/issues/13059 and https://github.com/mattermost/docker/issues/34)
@@ -62,6 +62,15 @@ services:
     ports:
       - ${CALLS_PORT}:8443/udp
       - ${CALLS_PORT}:8443/tcp
+
+  volumes:
+    config:
+    data:
+    logs:
+    plugins:
+    client-plugins:
+    bleve-indexes:
+
 
 # If you use rolling image tags and feel lucky watchtower can automatically pull new images and
 # instantiate containers from it. https://containrrr.dev/watchtower/
